@@ -1,22 +1,32 @@
-# Decision Tree Regression
-
+'''
+Decision Tree Regression
+Author: Henry Ha
+'''
 # Importing the libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.tree import DecisionTreeRegressor
+
 
 # Importing the dataset
 dataset = pd.read_csv('Position_Salaries.csv')
-X = dataset.iloc[:, 1:-1].values
-y = dataset.iloc[:, -1].values
+print(dataset.head())
+
+X = dataset.iloc[:, 1:2].values  # Ensuring X is a 2D array
+y = dataset.iloc[:, 2].values    # Target variable
+
+print(X.shape, y.shape)
+
 
 # Training the Decision Tree Regression model on the whole dataset
-from sklearn.tree import DecisionTreeRegressor
 regressor = DecisionTreeRegressor(random_state = 0)
 regressor.fit(X, y)
 
 # Predicting a new result
-regressor.predict([[6.5]])
+y_pred = regressor.predict([[6.5]])
+print(f"The predicted salary for position level 6.5 is: {y_pred[0]}")
+
 
 # Visualising the Decision Tree Regression results (higher resolution)
 X_grid = np.arange(min(X), max(X), 0.01)
